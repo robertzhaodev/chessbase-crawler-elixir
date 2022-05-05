@@ -13,14 +13,12 @@ defmodule LoginRequest do
     name: "Guest",
     pass: "Pass"
 
-
   @spec toSM(%LoginRequest{}):: %SocketMessage{}
-  def toSM(lg) do
-    sm = %SocketMessage{}
-    sm = SocketMessage.setAddress(sm, 0, 1)
-    # 0 is Unknow sender
-    # 1 is ServerID
-    buf = DataBuffer.writeInt32(sm["buf"], lg["nMode"]);
+  def toSM(loginReq) do
+    # 0 is Unknow sender, 1 is ServerID
+    sm = %SocketMessage{type: MessageTypes.logon} |> SocketMessage.setAddress(0, 1)
+
+    buf = DataBuffer.writeInt32(sm.buf, loginReq.nMode);
 
     SocketMessage.setBuf(sm, buf)
   end
