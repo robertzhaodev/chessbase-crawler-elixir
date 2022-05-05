@@ -13,6 +13,9 @@ defmodule Crawler do
 
   def handle_connect(_conn, state) do
     Logger.info("WS connected!")
+    loginReq = %LoginRequest{}
+    IO.puts(inspect(LoginRequest.toSM(loginReq)));
+
     {:ok, state}
   end
 

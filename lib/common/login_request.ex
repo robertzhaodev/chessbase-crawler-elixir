@@ -14,14 +14,15 @@ defmodule LoginRequest do
     pass: "Pass"
 
 
-  @spec toSM(lg:: %LoginRequest{}):: %SocketMessage{}
+  @spec toSM(%LoginRequest{}):: %SocketMessage{}
   def toSM(lg) do
     sm = %SocketMessage{}
     sm = SocketMessage.setAddress(sm, 0, 1)
     # 0 is Unknow sender
     # 1 is ServerID
+    buf = DataBuffer.writeInt32(sm["buf"], lg["nMode"]);
 
-    sm
+    SocketMessage.setBuf(sm, buf)
   end
 
 end
