@@ -1,18 +1,8 @@
 defmodule ChessbaseCrawler do
-  @moduledoc """
-  Documentation for ChessbaseCrawler.
-  """
+  @wsUrl Application.get_env(:chessbase_crawler, :wsUrl)
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ChessbaseCrawler.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  # The function called when start application
+  def start(_type, _args) do
+    Crawler.start(@wsUrl)
   end
 end
